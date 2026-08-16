@@ -1,112 +1,119 @@
-# MMLA: How Memory Lets the Past Shape the Future
+# MMLA Memory
 
-<div align="center">
+[中文 README](README_CN.md)
 
-**English** | [简体中文](./README_CN.md)
+MMLA studies how a bounded memory system can let earlier reasoning influence
+later reasoning without blurring causal order, authority, or evidence. The
+technology tree separates a validated component record from registered
+negative results and from five formal successor branches: reasoning-time
+training, atomic memory rows, predictive admission, dual policy/memory state,
+and completed-segment consolidation.
 
-</div>
+- Public paper: [arXiv:2606.28876](https://arxiv.org/abs/2606.28876)
+- Project repository: [MMLA-org/mmla-memory](https://github.com/MMLA-org/mmla-memory)
+- Authors: Junyi Zou and Avrova Donz (equal contribution)
 
-[![arXiv](https://img.shields.io/badge/arXiv-2606.28876-b31b1b.svg)](https://arxiv.org/abs/2606.28876)
-[![Technical Report](https://img.shields.io/badge/PDF-Technical_Report-316FF6.svg)](./MMLA_Technical_Report.pdf)
+## Documents
 
-MMLA studies a question that longer context alone does not answer:
+- [Complete Technical Report](MMLA_Technical_Report.pdf) — the additive V3-R24
+  candidate preserves the complete R22 evidence record and integrates all five
+  formal branches, their proofs, counterexamples, costs, and stop rules.
+- [Reasoning-Time Training](RTT_Foundations.pdf) — defines a typed within-problem
+  process and the evidence needed to distinguish policy-state learning from
+  search, context, memory, or workspace effects.
+- [Atomic Memory Rows](Atomic_Memory_Rows.pdf) — develops a bounded typed row,
+  trusted assembly, exact commit/NULL behavior, lifecycle semantics, recovery,
+  and explicit resource accounting.
+- [Predictive Memory Admission](Predictive_Memory_Admission.pdf) — formalizes
+  event-indexed grouped futures, expected-risk comparators, exact NULL,
+  uncertainty-aware admission, identification limits, and falsification gates.
+- [MMLA-RTT Dual State](MMLA_RTT_Dual_State.pdf) — keeps policy state and
+  authoritative memory distinct in type, privilege, lifetime, reset, rollback,
+  and ledger while specifying conditional composition and identification.
+- [Completed-Segment Consolidation](Completed_Segment_Consolidation.pdf) — gives
+  a causal post-closure contract with five clocks, immutable emitted history,
+  unique event ownership, teacher separation, exposure rules, and bounded work.
 
-> Which completed observations should be allowed to change a model's bounded,
-> persistent state, which old state should they replace, and when should the
-> model write nothing?
+## Evidence status
 
-The public paper introduces an event-level memory architecture with
-completed-segment consolidation, target-conditioned row construction, a hard
-complete-row overwrite or NULL, and training-only future supervision. The
-companion Technical Report preserves the full derivations, experiment history,
-negative results, audit trail, comparisons, protocols, and appendices.
+### Validated component evidence
 
-## Read the work
+The public V3/R22 record contains the admitted component evidence: controlled
+lifecycle behavior, sparse calibrated retrieval/fallback behavior, and typed
+transport and resident-state components under their stated scopes.
 
-- **Public paper:** [arXiv:2606.28876](https://arxiv.org/abs/2606.28876)
-- **Complete Technical Report:** [MMLA_Technical_Report.pdf](./MMLA_Technical_Report.pdf)
-- **Repository:** [MMLA-org/mmla-memory](https://github.com/MMLA-org/mmla-memory)
+### Registered negative results
 
-## Architecture in one minute
+The same record retains the closed scientific gates: the PM-I2 semantic
+interface did not qualify (0/9), PM-I3 found fitted-support failure for the
+learned latent-row route, and learned predictive overwrite remains unvalidated.
 
-1. A causal backbone predicts from previously available state.
-2. After a bounded local segment is complete, a bidirectional consolidator may
-   reinterpret only that already observed segment.
-3. The segment is converted into a bounded ordered list of events.
-4. For each event and target row, a neural module proposes semantic content;
-   a trusted assembler owns tenant, ACL, version, protection, provenance,
-   rollback, and deletion-verification fields.
-5. A future-blind controller commits one complete row or chooses NULL for that
-   event. Only later tokens can read the resulting segment state.
-6. During training only, same-prefix realized futures may price all registered
-   actions from one frozen snapshot. Deployment receives no future tokens.
+### Theory and protocol successors
 
-Resident rows have fixed bit budgets; unbounded provenance and archives remain
-external and separately charged. Canonical and neural bytes share one identity,
-version, and validation boundary, with mismatch quarantined rather than silently
-resolved. Multi-event training uses future-blind branch-prefix cost-to-go, and
-the report charges complete candidate construction and every replayed successor
-state. A true merge of two authoritative resident rows requires ordered events
-or a future bounded transaction; it is not hidden inside one row write.
-
-## What the evidence currently supports
-
-- **Controlled lifecycle execution:** 300/300 held-out records for each of
-  three fixed seeds.
-- **Bounded selection with archive fallback:** +5.5--16.6 F1 over a weak
-  budget-matched dense baseline and +4.0--6.2 F1 over BM25 on the reported
-  held-out multi-hop QA settings. The original Llama budget execution is
-  retained as failed; the corrected Qwen packer satisfies the stated
-  per-record caps.
-- **Typed relational transport:** 240/240 held-out records per seed, while
-  three same-checkpoint matched controls obtain no whole-record successes.
-
-## Current boundary
-
-The end-to-end predictive overwrite loop has not yet been validated.
-Dense-row, structured-span, and checkpoint-native readers preserve the
-registered physical mapping checks but none of the nine PM-I2 jobs qualifies
-semantically. Predictive overwrite therefore remains closed by gate. The
-report does not claim a learned future-value policy, repeated-write stability,
-or a full-system quality--cost crossover.
-
-The next registered question is fault localization: does the interface fail
-on fitted examples, only on fresh composition, or because of routing/content
-readout? Only a semantically qualified interface may open the expected-risk
-oracle and later controller experiments.
-
-## Related systems
-
-The report compares MMLA with FlashKDA, MemOps, and Metis. They address
-different layers of the problem: recurrent kernel substrate, memory-operation
-diagnosis, native model memory, and semantically authoritative bounded state.
-No superiority or implemented integration is claimed.
+The five focus papers and V3-R24 are local candidates pending independent
+Reviewer adjudication. They add conditional mathematics, systems contracts,
+counterexamples, and unrun protocols; they contain no new experimental result
+and do not establish an oracle gap, learned admission policy, strict-RTT or
+CSBC success, safety, or end-to-end efficiency superiority.
 
 ## Citation
 
-If you use or discuss this work, please cite the arXiv paper:
+Please cite the public arXiv paper as the primary public record:
 
 ```bibtex
-@misc{zou2026mmla,
-  title   = {MMLA: How Memory Lets the Past Shape the Future},
-  author  = {Zou, Junyi and Donz, Avrova},
-  year    = {2026},
-  eprint  = {2606.28876},
+@article{zou2026mmla,
+  title         = {MMLA: How Memory Lets the Past Shape the Future},
+  author        = {Zou, Junyi and Donz, Avrova},
+  year          = {2026},
+  eprint        = {2606.28876},
   archivePrefix = {arXiv},
-  primaryClass  = {cs.CL},
-  url     = {https://arxiv.org/abs/2606.28876}
+  primaryClass  = {cs.AI}
 }
 ```
 
-## Authors
+The following local candidate records are separate from the public arXiv
+publication:
 
-Junyi Zou and Avrova Donz contributed equally.
+```bibtex
+@techreport{zou2026mmlar24,
+  title  = {MMLA: How Memory Lets the Past Shape the Future},
+  author = {Zou, Junyi and Donz, Avrova},
+  year   = {2026},
+  note   = {V3-R24 complete technical report candidate; pending independent review}
+}
 
-- Junyi Zou — MMLA-org — [ORCID](https://orcid.org/0009-0009-1367-7428)
-- Avrova Donz — MMLA-org; Communication University of China (CUC) —
-  [ORCID](https://orcid.org/0009-0009-0100-0719)
+@techreport{zou2026rtt,
+  title  = {Reasoning-Time Training: Learning Before a Single Problem Ends},
+  author = {Zou, Junyi and Donz, Avrova},
+  year   = {2026},
+  note   = {MMLA focus-paper candidate; pending independent review}
+}
 
-This repository intentionally contains only the English and Chinese
-reader-facing READMEs and the complete Technical Report. It does not imply
-that checkpoints, datasets, or internal audit artifacts are already publicly
-downloadable.
+@techreport{zou2026amr,
+  title  = {Atomic Memory Rows: A Bounded, Verifiable Substrate for Editable Reasoning},
+  author = {Zou, Junyi and Donz, Avrova},
+  year   = {2026},
+  note   = {MMLA focus-paper candidate; pending independent review}
+}
+
+@techreport{zou2026pma,
+  title  = {Learning What to Remember: Predictive Admission for Bounded Reasoning-Time Memory},
+  author = {Zou, Junyi and Donz, Avrova},
+  year   = {2026},
+  note   = {MMLA focus-paper candidate; pending independent review}
+}
+
+@techreport{zou2026dualstate,
+  title  = {MMLA-RTT: Dual-State Learning at Reasoning Time},
+  author = {Zou, Junyi and Donz, Avrova},
+  year   = {2026},
+  note   = {MMLA focus-paper candidate; pending independent review}
+}
+
+@techreport{zou2026csbc,
+  title  = {Causal Generation, Retrospective Consolidation: Completed-Segment Bidirectional Memory Without Temporal Leakage},
+  author = {Zou, Junyi and Donz, Avrova},
+  year   = {2026},
+  note   = {MMLA focus-paper candidate; pending independent review}
+}
+```

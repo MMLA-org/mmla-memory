@@ -1,74 +1,106 @@
-# MMLA：记忆如何让过去塑造未来
+# MMLA Memory
 
-<div align="center">
+[English README](README.md)
 
-[English](./README.md) | **简体中文**
+MMLA 研究一个有界记忆系统如何让较早的推理影响较后的推理，同时不混淆
+因果顺序、权威状态与证据边界。技术树将已经验证的组件证据、已登记的负面
+结果，以及五条形式化后续分支明确分开：推理时训练、原子记忆行、预测式
+准入、策略/记忆双状态和已完成片段整合。
 
-</div>
+- 公开论文：[arXiv:2606.28876](https://arxiv.org/abs/2606.28876)
+- 项目仓库：[MMLA-org/mmla-memory](https://github.com/MMLA-org/mmla-memory)
+- 作者：Junyi Zou、Avrova Donz（共同贡献）
 
-[![arXiv](https://img.shields.io/badge/arXiv-2606.28876-b31b1b.svg)](https://arxiv.org/abs/2606.28876)
-[![Technical Report](https://img.shields.io/badge/PDF-Technical_Report-316FF6.svg)](./MMLA_Technical_Report.pdf)
+## 文档
 
-MMLA 研究一个仅靠扩大上下文窗口无法回答的问题：
+- [完整技术报告](MMLA_Technical_Report.pdf) — V3-R24 候选稿完整保留 R22
+  的证据记录，并整合五条形式化分支及其证明、反例、成本和停止规则。
+- [推理时训练](RTT_Foundations.pdf) — 定义有类型的题内过程，以及区分策略
+  状态学习与搜索、上下文、记忆或工作区影响所需的证据。
+- [原子记忆行](Atomic_Memory_Rows.pdf) — 建立有界类型化行、可信组装、精确
+  提交/NULL、生命周期语义、恢复机制和显式资源核算。
+- [预测式记忆准入](Predictive_Memory_Admission.pdf) — 形式化事件索引的分组
+  未来、期望风险比较器、精确 NULL、不确定性感知准入、可识别性限制和证伪门。
+- [MMLA-RTT 双状态](MMLA_RTT_Dual_State.pdf) — 让策略状态与权威记忆在类型、
+  权限、生命周期、重置、回滚和账本上保持分离，并给出条件式组合与识别协议。
+- [已完成片段整合](Completed_Segment_Consolidation.pdf) — 给出闭合后因果契约：
+  五种时钟、不可变已输出历史、唯一事件归属、教师信息隔离、暴露规则和有界工作量。
 
-> 哪些已经完成的观察应当被允许改变模型的有界持久状态？它们应当替换哪一段旧状态？模型又应当在什么时候选择不写入？
+## 证据状态
 
-公开论文提出了一种事件级记忆架构：模型在已完成的局部片段上进行整合，为目标 row 构造完整候选，并在“完整 row 原子覆写”和 NULL 之间做出选择。真实未来只在训练阶段用于评价写入动作；部署阶段保持因果且不可见未来。完整 Technical Report 保留了推导、实验历史、负面结果、审计边界、比较、协议与附录。
+### 已验证的组件证据
 
-## 阅读论文
+公开 V3/R22 记录包含已准入的组件级证据：在各自声明的范围内，受控生命周期
+行为、稀疏且校准过的检索/回退行为，以及类型化传输和驻留状态组件。
 
-- **arXiv 论文：** [arXiv:2606.28876](https://arxiv.org/abs/2606.28876)
-- **完整技术报告：** [MMLA_Technical_Report.pdf](./MMLA_Technical_Report.pdf)
-- **项目仓库：** [MMLA-org/mmla-memory](https://github.com/MMLA-org/mmla-memory)
+### 已登记的负面结果
 
-## 一分钟理解 MMLA
+同一记录保留了已经关闭的科学门：PM-I2 语义接口未通过（0/9）；PM-I3 对学习式
+潜在行路线发现拟合支持失败；学习式预测覆盖仍未获得验证。
 
-1. 因果 backbone 只基于已经可用的状态进行预测。
-2. 一个有界局部片段完成后，双向 consolidator 只重新解释已经观察到的内容，不改变此前输出。
-3. 片段被转换为有界、有序的事件序列。
-4. 对每个事件和候选目标 row，神经模块提出语义内容；可信 assembler 管理 tenant、ACL、版本、保护、来源、回滚与删除验证等系统字段。
-5. future-blind controller 为该事件提交一个完整 row，或选择 NULL。只有之后的 token 才能读取更新后的状态。
-6. 训练阶段可以用共享同一 prefix 的多个真实 continuation 为动作定价；部署阶段不接收任何未来 token。
+### 理论与协议后续稿
 
-Resident row 具有固定 bit budget；无界来源记录和 archive 保留在外部并单独计算成本。Canonical view 与 neural view 共享 identity、version 和 validation boundary；二者不一致时 row 会被隔离，而不是静默选择其中一个。多事件 teacher 使用 future-blind branch-prefix cost-to-go，报告同时计算完整候选构造和所有 replay successor state 的成本。真正合并两个 authoritative resident rows 需要有序事件或未来的有界事务，不能隐藏在一次单 row 写入中。
-
-## 当前证据支持什么
-
-- **受控生命周期执行：** 三个固定 seed 均达到 300/300 held-out records。
-- **带 archive fallback 的有界选择：** 在报告的 held-out multi-hop QA 设置中，相对弱的、预算匹配的 dense baseline 提升 5.5--16.6 F1，相对 BM25 提升 4.0--6.2 F1。原始 Llama 预算执行保留为失败结果；修正后的 Qwen packer 满足逐记录预算上限。
-- **Typed relational transport：** 每个 seed 达到 240/240 held-out records；三个 same-checkpoint matched controls 均没有 whole-record success。
-
-## 当前证据边界
-
-端到端 predictive overwrite 闭环尚未验证。Dense-row、structured-span 与 checkpoint-native reader 虽然通过了已注册的物理映射检查，但 PM-I2 的九个任务都没有通过语义资格门。因此 predictive overwrite 仍然关闭。本报告不声称已经得到 learned future-value policy、重复写入稳定性或完整系统级 quality--cost crossover。
-
-下一项已注册问题是故障定位：接口是在 fitted examples 上就失败，还是只在 fresh composition 上失败，抑或问题来自 routing/content readout？只有通过语义资格门的接口，才允许开启 expected-risk oracle 和后续 controller 实验。
-
-## 与相关系统的关系
-
-报告比较了 MMLA、FlashKDA、MemOps 和 Metis。它们分别处理 recurrent kernel substrate、memory-operation diagnosis、native model memory 与语义上具有权威性的有界状态等不同层面。当前不声称优于这些系统，也不声称已经完成集成。
+五篇焦点论文和 V3-R24 都是本地候选稿，仍待 Reviewer 独立裁定。它们新增的是
+条件数学、系统契约、反例和尚未运行的协议，不包含新的实验结果，也不证明预言机
+差距、学习式准入策略、严格 RTT 或 CSBC 成功、安全性，或端到端效率优势。
 
 ## 引用
 
-如果你的研究使用或讨论了本工作，请引用 arXiv 论文：
+请将公开 arXiv 论文作为主要公开记录引用：
 
 ```bibtex
-@misc{zou2026mmla,
-  title   = {MMLA: How Memory Lets the Past Shape the Future},
-  author  = {Zou, Junyi and Donz, Avrova},
-  year    = {2026},
-  eprint  = {2606.28876},
+@article{zou2026mmla,
+  title         = {MMLA: How Memory Lets the Past Shape the Future},
+  author        = {Zou, Junyi and Donz, Avrova},
+  year          = {2026},
+  eprint        = {2606.28876},
   archivePrefix = {arXiv},
-  primaryClass  = {cs.CL},
-  url     = {https://arxiv.org/abs/2606.28876}
+  primaryClass  = {cs.AI}
 }
 ```
 
-## 作者
+以下本地候选稿记录与公开 arXiv 论文分开：
 
-Junyi Zou 与 Avrova Donz 为同等贡献作者。
+```bibtex
+@techreport{zou2026mmlar24,
+  title  = {MMLA: How Memory Lets the Past Shape the Future},
+  author = {Zou, Junyi and Donz, Avrova},
+  year   = {2026},
+  note   = {V3-R24 complete technical report candidate; pending independent review}
+}
 
-- Junyi Zou — MMLA-org — [ORCID](https://orcid.org/0009-0009-1367-7428)
-- Avrova Donz — MMLA-org；Communication University of China (CUC) — [ORCID](https://orcid.org/0009-0009-0100-0719)
+@techreport{zou2026rtt,
+  title  = {Reasoning-Time Training: Learning Before a Single Problem Ends},
+  author = {Zou, Junyi and Donz, Avrova},
+  year   = {2026},
+  note   = {MMLA focus-paper candidate; pending independent review}
+}
 
-本仓库有意只保留英文 README、中文 README 与完整 Technical Report。Checkpoint、数据集和内部审计 artifact 并不因此被视为已经公开下载。
+@techreport{zou2026amr,
+  title  = {Atomic Memory Rows: A Bounded, Verifiable Substrate for Editable Reasoning},
+  author = {Zou, Junyi and Donz, Avrova},
+  year   = {2026},
+  note   = {MMLA focus-paper candidate; pending independent review}
+}
+
+@techreport{zou2026pma,
+  title  = {Learning What to Remember: Predictive Admission for Bounded Reasoning-Time Memory},
+  author = {Zou, Junyi and Donz, Avrova},
+  year   = {2026},
+  note   = {MMLA focus-paper candidate; pending independent review}
+}
+
+@techreport{zou2026dualstate,
+  title  = {MMLA-RTT: Dual-State Learning at Reasoning Time},
+  author = {Zou, Junyi and Donz, Avrova},
+  year   = {2026},
+  note   = {MMLA focus-paper candidate; pending independent review}
+}
+
+@techreport{zou2026csbc,
+  title  = {Causal Generation, Retrospective Consolidation: Completed-Segment Bidirectional Memory Without Temporal Leakage},
+  author = {Zou, Junyi and Donz, Avrova},
+  year   = {2026},
+  note   = {MMLA focus-paper candidate; pending independent review}
+}
+```
