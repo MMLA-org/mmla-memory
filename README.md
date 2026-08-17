@@ -1,119 +1,80 @@
-# MMLA Memory
+# MMLA memory paper family
 
-[中文 README](README_CN.md)
+[中文说明](README_CN.md)
 
-MMLA studies how a bounded memory system can let earlier reasoning influence
-later reasoning without blurring causal order, authority, or evidence. The
-technology tree separates a validated component record from registered
-negative results and from five formal successor branches: reasoning-time
-training, atomic memory rows, predictive admission, dual policy/memory state,
-and completed-segment consolidation.
+This local, manual-upload bundle contains the R25 integrated technical report and five R02 theory successors. It is an editorial package, not a new experimental release. Every R02/R25 artifact remains a candidate pending independent Reviewer adjudication.
 
-- Public paper: [arXiv:2606.28876](https://arxiv.org/abs/2606.28876)
-- Project repository: [MMLA-org/mmla-memory](https://github.com/MMLA-org/mmla-memory)
-- Authors: Junyi Zou and Avrova Donz (equal contribution)
+## PDFs
 
-## Documents
+- [MMLA Technical Report R25](MMLA_Technical_Report.pdf)
+- [Reasoning-Time Training: Learning Before a Single Problem Ends](RTT_Foundations.pdf)
+- [Atomic Memory Rows: A Bounded, Verifiable Substrate for Editable Reasoning](Atomic_Memory_Rows.pdf)
+- [Learning What to Remember: Predictive Admission for Bounded Reasoning-Time Memory](Predictive_Memory_Admission.pdf)
+- [MMLA-RTT: Dual-State Learning at Reasoning Time](MMLA_RTT_Dual_State.pdf)
+- [Causal Generation, Retrospective Consolidation: Completed-Segment Bidirectional Memory Without Temporal Leakage](Completed_Segment_Consolidation.pdf)
 
-- [Complete Technical Report](MMLA_Technical_Report.pdf) — the additive V3-R24
-  candidate preserves the complete R22 evidence record and integrates all five
-  formal branches, their proofs, counterexamples, costs, and stop rules.
-- [Reasoning-Time Training](RTT_Foundations.pdf) — defines a typed within-problem
-  process and the evidence needed to distinguish policy-state learning from
-  search, context, memory, or workspace effects.
-- [Atomic Memory Rows](Atomic_Memory_Rows.pdf) — develops a bounded typed row,
-  trusted assembly, exact commit/NULL behavior, lifecycle semantics, recovery,
-  and explicit resource accounting.
-- [Predictive Memory Admission](Predictive_Memory_Admission.pdf) — formalizes
-  event-indexed grouped futures, expected-risk comparators, exact NULL,
-  uncertainty-aware admission, identification limits, and falsification gates.
-- [MMLA-RTT Dual State](MMLA_RTT_Dual_State.pdf) — keeps policy state and
-  authoritative memory distinct in type, privilege, lifetime, reset, rollback,
-  and ledger while specifying conditional composition and identification.
-- [Completed-Segment Consolidation](Completed_Segment_Consolidation.pdf) — gives
-  a causal post-closure contract with five clocks, immutable emitted history,
-  unique event ownership, teacher separation, exposure rules, and bounded work.
+## Evidence boundary
 
-## Evidence status
+**Validated evidence.** The public V3 and R25 report retain only the evidence already admitted by the project evidence ledger. R25 reorganizes and connects that material; it does not add a run, benchmark result, or empirical claim.
 
-### Validated component evidence
+**Registered negatives.** Null findings, negative controls, unresolved comparisons, and stop rules remain negative or unresolved. This package does not convert absence of evidence into a positive result.
 
-The public V3/R22 record contains the admitted component evidence: controlled
-lifecycle behavior, sparse calibrated retrieval/fallback behavior, and typed
-transport and resident-state components under their stated scopes.
+**Theory successors.** The five R02 papers provide assumption-explicit definitions, typed models, proofs, counterexamples, and falsification obligations. They do not establish an oracle gap, learned admission policy, qualified semantic interface, empirical dual-state success, or empirical completed-segment consolidation.
 
-### Registered negative results
+The public narrative predecessor is [arXiv:2606.28876](https://arxiv.org/abs/2606.28876). Scientific acceptance of R25 and all five R02 successors remains Reviewer-owned.
 
-The same record retains the closed scientific gates: the PM-I2 semantic
-interface did not qualify (0/9), PM-I3 found fitted-support failure for the
-learned latent-row route, and learned predictive overwrite remains unvalidated.
-
-### Theory and protocol successors
-
-The five focus papers and V3-R24 are local candidates pending independent
-Reviewer adjudication. They add conditional mathematics, systems contracts,
-counterexamples, and unrun protocols; they contain no new experimental result
-and do not establish an oracle gap, learned admission policy, strict-RTT or
-CSBC success, safety, or end-to-end efficiency superiority.
-
-## Citation
-
-Please cite the public arXiv paper as the primary public record:
+## BibTeX
 
 ```bibtex
 @article{zou2026mmla,
-  title         = {MMLA: How Memory Lets the Past Shape the Future},
-  author        = {Zou, Junyi and Donz, Avrova},
-  year          = {2026},
-  eprint        = {2606.28876},
+  title   = {MMLA: How Memory Lets the Past Shape the Future},
+  author  = {Zou, Junyi and Donz, Avrova},
+  year    = {2026},
+  eprint  = {2606.28876},
   archivePrefix = {arXiv},
-  primaryClass  = {cs.AI}
+  primaryClass  = {cs.AI},
+  url     = {https://arxiv.org/abs/2606.28876}
 }
-```
 
-The following local candidate records are separate from the public arXiv
-publication:
-
-```bibtex
-@techreport{zou2026mmlar24,
+@techreport{zou2026mmlar25,
   title  = {MMLA: How Memory Lets the Past Shape the Future},
   author = {Zou, Junyi and Donz, Avrova},
   year   = {2026},
-  note   = {V3-R24 complete technical report candidate; pending independent review}
+  note   = {R25 major-revision candidate; pending independent Reviewer adjudication}
 }
 
-@techreport{zou2026rtt,
+@article{zou2026rtt,
   title  = {Reasoning-Time Training: Learning Before a Single Problem Ends},
   author = {Zou, Junyi and Donz, Avrova},
   year   = {2026},
-  note   = {MMLA focus-paper candidate; pending independent review}
+  note   = {R02 major-revision candidate; pending independent Reviewer adjudication}
 }
 
-@techreport{zou2026amr,
+@article{zou2026amr,
   title  = {Atomic Memory Rows: A Bounded, Verifiable Substrate for Editable Reasoning},
   author = {Zou, Junyi and Donz, Avrova},
   year   = {2026},
-  note   = {MMLA focus-paper candidate; pending independent review}
+  note   = {R02 major-revision candidate; pending independent Reviewer adjudication}
 }
 
-@techreport{zou2026pma,
+@article{zou2026pma,
   title  = {Learning What to Remember: Predictive Admission for Bounded Reasoning-Time Memory},
   author = {Zou, Junyi and Donz, Avrova},
   year   = {2026},
-  note   = {MMLA focus-paper candidate; pending independent review}
+  note   = {R02 major-revision candidate; pending independent Reviewer adjudication}
 }
 
-@techreport{zou2026dualstate,
-  title  = {MMLA-RTT: Dual-State Learning at Reasoning Time},
+@article{zou2026dual,
+  title  = {MMLA--RTT: Dual-State Learning at Reasoning Time},
   author = {Zou, Junyi and Donz, Avrova},
   year   = {2026},
-  note   = {MMLA focus-paper candidate; pending independent review}
+  note   = {R02 major-revision candidate; pending independent Reviewer adjudication}
 }
 
-@techreport{zou2026csbc,
+@article{zou2026csbc,
   title  = {Causal Generation, Retrospective Consolidation: Completed-Segment Bidirectional Memory Without Temporal Leakage},
   author = {Zou, Junyi and Donz, Avrova},
   year   = {2026},
-  note   = {MMLA focus-paper candidate; pending independent review}
+  note   = {R02 major-revision candidate; pending independent Reviewer adjudication}
 }
 ```
